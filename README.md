@@ -10,3 +10,7 @@
 
 ## Compte-rendu 2eme réunion :
 0) Mettre plus d'étapes dans le README
+1) Installation mutualisée : venv, fichier requirement.txt et Werkzeug (à préciser pour le doggy-bag ; pas d'install le jour J)
+2) Présentation d'Armel de son 'hello world' en Flask. Super!!! Et ça marche. A simplifier avant l'étape 2 sur l'architecture (éviter les blueprint et les multiples niveaux d'arborescence)
+3) Présentation d'Armel de son 'render' en Flask. Très bon début pour le step 2.
+4) Tâche à faire : Gregory détaille l'installation pour le doggy-bag comme on vient de la faire. Armel simplifie le 'hello-world' et relance un framadate. Matthieu s'occupe de voir la partie administrative et logistique (lauriane et Remy) pour mettre le meetup sur de bons rails.
