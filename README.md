@@ -7,3 +7,6 @@
 4) montrer l'intérêt de faire plus avec des interactions python : variable type utilisateur dans un système de login
 5) montrer (un)des sites construits par Flask pour démontrer ce qu'on peut y faire.
 6) mettre en production un service !
+
+## Compte-rendu 2eme réunion :
+0) Mettre plus d'étapes dans le README
