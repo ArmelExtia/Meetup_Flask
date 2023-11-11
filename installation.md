@@ -11,7 +11,7 @@ L'environnement virtuel permettra d'installer des paquet uniquement dans cet env
 Une fois l'environnement virtuel créé vous devriez voir apparaitre un répertoire venv.
 
 Installation des paquets
-Installez les paquets nécessaire directement dans l'environnement virtuel via :
+Installez les paquets nécessaires directement dans l'environnement virtuel via :
 
 venv\Scripts\python.exe -m pip install -r requirements.txt
 
