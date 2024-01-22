@@ -1,0 +1,15 @@
+
+    <h1>Calculatrice Basique</h1>
+    <form method="post">
+        
+        <input type="number" step="any" name="num1" placeholder="Nombre 1" {% if num1Value is defined %}  value={{num1Value}} {% endif %} required>
+        <select name="operator">
+            <option value="add" {% if ope is defined and ope=='add' %} selected="selected" {% endif %} >+</option>
+            <option value="subtract" {% if ope is defined and ope=='subtract' %} selected="selected" {% endif %}>-</option>
+            <option value="multiply" {% if ope is defined and ope=='multiply' %} selected="selected" {% endif %}>*</option>
+            <option value="divide" {% if ope is defined and ope=='divide' %} selected="selected" {% endif %}>/</option>
+        </select>
+        <input type="number" step="any" name="num2" placeholder="Nombre 2" {% if num2Value is defined %}  value={{num2Value}} {% endif %} required>
+        <button type="submit">Calculer</button>
+    </form>
+    <p>{{ result }}</p>
