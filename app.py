@@ -12,10 +12,10 @@ def bonjour():
     # Le retour de la route dans le navigateur sera Bonjour
     return helloLang('fr')
 
-# On définit une route par défaut
+# On définit une route paramétrique
 @app.route('/hello/<string:lang>')
 def helloLang(lang):
-    # Le retour de la route dans le navigateur sera Bonjour
+    # Le retour de la route dans le navigateur sera Bonjour dans la langue choisie et disponible
     txt = ""
     if lang == 'fr':
         txt = "Bonjour"
