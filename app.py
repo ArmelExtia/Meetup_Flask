@@ -27,40 +27,41 @@ def get_jinja():
     return render_template('get_jinja.html', ma_list = la_liste)
 
 # On définit une route pour afficher un calculatrice
-@app.route('/calculatrice', methods=['GET'])
-def calculatriceGet():
-    return render_template('calculatrice.html', result='')
-
-@app.route('/calculatrice', methods=['POST'])
-def calculatricePost():
+@app.route('/calculatrice', methods=['GET', 'POST'])
+def calculatrice():
     # Le résultat par défault sera none 
     result = ""
     # Si la méthod est un post c'est que le formulaire a envoyé une demande
-    # On récupère la valeur 1 depuis la requete envoyé
-    num1 = float(request.form['num1'])
-    # On récupère la valeur 2 depuis la requete envoyé
-    num2 = float(request.form['num2'])
-    # On récupère l'opérateur' depuis la requete envoyé
-    operator = request.form['operator']
-    # Si l'opérateur est ajout
-    if operator == 'add':
-        # Le résulatat renvoyé sera
-        result = f"Résultat : {num1 + num2}"
-    # Si l'opérateur est une soustration    
-    elif operator == 'subtract':
-        result = f" Résultat : {num1 - num2}"
-    # Si l'opérateur est une multiplication
-    elif operator == 'multiply':
-        result = f"Résultat : {num1 * num2}"
-    # Si l'opérateur est une division
-    elif operator == 'divide':
-        # Les division par zero sont impossible!!!
-        if num2 != 0:
-            result = f"Résultat : {num1 / num2}"
-        else:
-            result = "Division par zéro impossible"
+    if request.method == 'POST':
+        # On récupère la valeur 1 depuis la requete envoyé
+        num1 = float(request.form['num1'])
+        # On récupère la valeur 2 depuis la requete envoyé
+        num2 = float(request.form['num2'])
+        # On récupère l'opérateur' depuis la requete envoyé
+        operator = request.form['operator']
+        # Si l'opérateur est ajout
+        if operator == 'add':
+            # Le résulatat renvoyé sera
+            result = f"Résultat : {num1 + num2}"
+        # Si l'opérateur est une soustration    
+        elif operator == 'subtract':
+            result = f" Résultat : {num1 - num2}"
+        # Si l'opérateur est une multiplication
+        elif operator == 'multiply':
+            result = f"Résultat : {num1 * num2}"
+        # Si l'opérateur est une division
+        elif operator == 'divide':
+            # Les division par zero sont impossible!!!
+            if num2 != 0:
+                result = f"Résultat : {num1 / num2}"
+            else:
+                result = "Division par zéro impossible"
+    # Si la requete n'est pas un post mais un get ou autre chose a laquel nous n'aurions pas pensé :)
+    else:
+        # On ne fait rien
+        pass
     # Dans tous les cas on renvoi la page de calcul
-    return render_template('calculatrice.html', result=result, num1Value=num1, ope=operator, num2Value=num2)
+    return render_template('calculatrice.html', result=result)
 
 #  Exécutez l'application si ce script est exécuté en tant que programme principal
 if __name__ == '__main__':
