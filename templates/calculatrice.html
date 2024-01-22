@@ -1,7 +1,7 @@
 
     <h1>Calculatrice Basique</h1>
+    {{ utilisateur }}
     <form method="post">
-        
         <input type="number" step="any" name="num1" placeholder="Nombre 1" {% if num1Value is defined %}  value={{num1Value}} {% endif %} required>
         <select name="operator">
             <option value="add" {% if ope is defined and ope=='add' %} selected="selected" {% endif %} >+</option>
