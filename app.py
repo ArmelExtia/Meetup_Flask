@@ -1,6 +1,6 @@
 # On importe le module Flask 
 
-# /!\ On ajoute à l'import de flask le module url_for, redirect et session
+# /!\ On ajoute à l'import de flask les modules utiles
 from flask import Flask, render_template,request,url_for, redirect,session
 
 # On crée une instance d'application
@@ -12,7 +12,7 @@ def bonjour():
     # Le retour de la route dans le navigateur sera Bonjour
     return helloLang('fr')
 
-# On définit une route paramétrique
+# On définit deux routes dont l'une paramétrique. Elles pointent toutes les deux sur la même fonction
 @app.route('/hello/')
 @app.route('/hello/<string:lang>/')
 def helloLang(lang='fr'):
@@ -49,15 +49,15 @@ def login():
 # On crée une route pour le dashboard
 @app.route('/dashboard')
 def dashboard():
-    # Si il y a un utilisateur connecté on lui présente soin dashboard
+    # Si il y a un utilisateur connecté on lui présente son dashboard
     if 'user' in session:
-        #La connexion est autorisé
-        message = f"Bienvenue dans votre espace personnelle {session['user']}!"
+        #La connexion est autorisée
+        message = f"Bienvenue dans votre espace personnel {session['user']}!"
         return message
-    # Autrement on le renvoi à la page de login
+    # Autrement on le renvoie à la page de login
     return redirect(url_for('login'))
 
-# On se fait une petite page de logout parce qu'on veux pouvoir se déconnecter.
+# On se fait une petite page de logout parce qu'on veut pouvoir se déconnecter.
 @app.route('/logout')
 def logout():
     # Si il y avait un utilisateur connecté
@@ -80,7 +80,9 @@ def logout():
 
 
 
-
+######################
+##      RENDER      ##
+######################
 
 
 
@@ -97,6 +99,10 @@ def get_jinja():
     la_liste = ['Salut','Comment tu va?', 'bienvenue dans le monde magique de jinja!']
     # On retourne vers la page html 
     return render_template('get_jinja.html', ma_list = la_liste)
+
+######################
+##   CALCULATRICE   ##
+######################
 
 # On définit une route pour afficher un calculatrice
 @app.route('/calculatrice', methods=['GET', 'POST'])
@@ -148,6 +154,9 @@ def calculatrice():
 
 
 
+######################
+##       MAIN       ##
+######################
 
 
 #  Exécutez l'application si ce script est exécuté en tant que programme principal
