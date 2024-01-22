@@ -21,7 +21,7 @@ def get_render():
 @app.route('/get_jinja')
 def get_jinja():
 
-    la_liste = ['Salut','Comment tu va?', 'bienvenue dans le monde magique de jinja!']
+    la_liste = ['Salut', 'bienvenue dans le monde magique de jinja!','Comment tu vas?']
     return render_template('get_jinja.html', ma_list = la_liste)
 
 #  Exécutez l'application si ce script est exécuté en tant que programme principal
