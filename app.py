@@ -2,9 +2,15 @@
 
 # /!\ On ajoute à l'import de flask les modules utiles
 from flask import Flask, render_template,request,url_for, redirect,session
+from flask import make_response
 
 # On crée une instance d'application
 app = Flask(__name__)
+
+
+######################
+## ROUTE PAR DEFAUT ##
+######################
 
 # On définit une route par défault
 @app.route('/')
@@ -90,13 +96,13 @@ def logout():
 @app.route('/get_render')
 def get_render():
 # Les templates sont dans le dossier templates
-    return render_template('get_render.html') # ATTENTION il faut redémarré l'application pour modifier le contenu du html
+    return render_template('get_render.html') # ATTENTION il faut redémarrer l'application pour modifier le contenu du html
 
 # On définit une route pour afficher le résultat d'un template html avec un jinja
 @app.route('/get_jinja')
 def get_jinja():
-    # On crée une liste de valeur qui sera renvoyé à jinja
-    la_liste = ['Salut','Comment tu va?', 'bienvenue dans le monde magique de jinja!']
+    # On crée une liste de valeur qui sera renvoyée à jinja
+    la_liste = ['Salut', 'bienvenue dans le monde magique de jinja!','Comment tu vas?']
     # On retourne vers la page html 
     return render_template('get_jinja.html', ma_list = la_liste)
 
@@ -104,21 +110,21 @@ def get_jinja():
 ##   CALCULATRICE   ##
 ######################
 
-# On définit une route pour afficher un calculatrice
+# On définit une route pour afficher une calculatrice
 @app.route('/calculatrice', methods=['GET', 'POST'])
 def calculatrice():
     if 'user' in session:
         # Le résultat par défault sera none 
         result = ""
-        # Si la méthod est un post c'est que le formulaire a envoyé une demande
+        # Si la méthode est un post c'est que le formulaire a envoyé une demande
         if request.method == 'POST':
-            # On récupère la valeur 1 depuis la requete envoyé
+            # On récupère la valeur 1 depuis la requête envoyée
             num1 = float(request.form['num1'])
-            # On récupère la valeur 2 depuis la requete envoyé
+            # On récupère la valeur 2 depuis la requête envoyée
             num2 = float(request.form['num2'])
-            # On récupère l'opérateur' depuis la requete envoyé
+            # On récupère l'opérateur' depuis la requête envoyée
             operator = request.form['operator']
-            # Si l'opérateur est ajout
+            # Si l'opérateur est une addition
             if operator == 'add':
                 # Le résulatat renvoyé sera
                 result = f"Résultat : {num1 + num2}"
@@ -130,7 +136,7 @@ def calculatrice():
                 result = f"Résultat : {num1 * num2}"
             # Si l'opérateur est une division
             elif operator == 'divide':
-                # Les division par zero sont impossible!!!
+                # Les divisions par zero sont impossibles!!!
                 if num2 != 0:
                     result = f"Résultat : {num1 / num2}"
                 else:
@@ -146,13 +152,54 @@ def calculatrice():
 
 
 
+#######################
+##GESTION DES ERREURS##
+#######################
+
+@app.errorhandler(401)
+@app.errorhandler(404)
+@app.errorhandler(500)
+def gestion_des_erreur(error):
+    return "Cette erreur est sous contrôle : {}".format(error.code), error.code
 
 
 
 
+######################
+## COOKIES standard ##
+######################
+
+# On définit une route pour afficher un calculatrice
+@app.route('/myurl', methods=['GET', 'POST'])
+def myurlfunction():
+    if request.method == 'POST':
+        dataCookie = request.cookies.get('lenomduncookieauchoix')
+        reponse = make_response(render_template('get_jinja.html', ma_list = []))
+        reponse.set_cookie('lenomduncookieauchoix',str(int(dataCookie)+1), max_age=3600*24*30) # stocke le cookie sur 30jours
+        return reponse
+    else:
+        reponse = make_response(render_template('get_jinja.html', ma_list = []))
+        reponse.set_cookie('lenomduncookieauchoix', '0', max_age=3600*24*30) # stocke le cookie sur 30jours
+        return reponse
 
 
+######################
+##    PLUS A VOIR   ##
+######################
+@app.context_processor 
+def utility_processor():
+  def unefonction():
+      return 'du python'
+  def unefonctionplussophistiquee(type):
+      return 'du python ...'
+  return dict(jinjaAppelUneFonction=unefonction, 
+              jinjaAppelUneAutreFonction=unefonctionplussophistiquee)
 
+
+@app.template_filter('monfiltreJinja')
+def monfiltreJinja(s, find, replace):
+    """A non-optimal implementation of a string filter"""
+    return s.replace(find, replace)
 
 ######################
 ##       MAIN       ##

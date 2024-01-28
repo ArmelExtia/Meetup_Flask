@@ -1,0 +1,22 @@
+<html>
+<!-- Design navigation bar -->
+<nav class="navbar navbar-default navbar-custom">
+  <div class="container-fluid">
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  <ul class="nav navbar-nav">
+        <li ><a href="{{ url_for('bonjour') }}">Racine</a></li>
+		<li ><a href="{{ url_for('login') }}">Login demo</a></li>
+		<li ><a href="{{ url_for('get_render') }}">Basic render</a></li>
+		<li ><a href="{{ url_for('get_jinja') }}">Jinja render</a></li>
+		<li ><a href="{{ url_for('calculatrice') }}">Calculatrice</a></li>
+		<li ><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+		{% if session.get('user') %}
+		<li ><a href="{{ url_for('logout') }}">Logout</a></li>
+		{% endif %}
+	  </ul>
+	</div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</html>
