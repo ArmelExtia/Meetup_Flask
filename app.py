@@ -48,15 +48,15 @@ def login():
 # On crée une route pour le dashboard
 @app.route('/dashboard')
 def dashboard():
-    # Si il y a un utilisateur connecté on lui présente soin dashboard
+    # Si il y a un utilisateur connecté on lui présente son dashboard
     if 'user' in session:
-        #La connexion est autorisé
-        message = f"Bienvenue dans votre espace personnelle {session['user']}!"
+        #La connexion est autorisée
+        message = f"Bienvenue dans votre espace personnel {session['user']}!"
         return message
     # Autrement on le renvoi à la page de login
     return redirect(url_for('login'))
 
-# On se fait une petite page de logout parce qu'on veux pouvoir se déconnecter.
+# On se fait une petite page de logout parce qu'on veut pouvoir se déconnecter.
 @app.route('/logout')
 def logout():
     # Si il y avait un utilisateur connecté
