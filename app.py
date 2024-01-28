@@ -13,7 +13,7 @@ def bonjour():
     return helloLang('fr')
 
 # On définit une route paramétrique
-@app.route('/hello/<string:lang>')
+@app.route('/hello/<string:lang>/')
 def helloLang(lang):
     # Le retour de la route dans le navigateur sera Bonjour dans la langue choisie et disponible
     txt = ""
@@ -41,13 +41,13 @@ def login():
         # On crée la session avec le nom utilisateur envoyé par l'utilisateur
         session['user'] = request.form['username']
         # Et on envoi à son tableau de bord
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('dashboardFct'))
     # Si la méthode d'accès à la page est un get on envoi la page html de login.
     return render_template('login.html')
 
 # On crée une route pour le dashboard
 @app.route('/dashboard')
-def dashboard():
+def dashboardFct():
     # Si il y a un utilisateur connecté on lui présente son dashboard
     if 'user' in session:
         #La connexion est autorisée
