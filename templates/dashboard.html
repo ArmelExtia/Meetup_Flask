@@ -1,0 +1,6 @@
+<!-- Les fichier de css seront stocké dans le dossier static -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='default_css.css') }}">
+
+{% include "navBarDemoExtia.html" %}
+
+<p>Bienvenue dans votre espace personnel {{ user }}</p>

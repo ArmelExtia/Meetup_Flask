@@ -58,8 +58,7 @@ def dashboard():
     # Si il y a un utilisateur connecté on lui présente son dashboard
     if 'user' in session:
         #La connexion est autorisée
-        message = f"Bienvenue dans votre espace personnel {session['user']}!"
-        return message
+        return render_template('dashboard.html', user = session['user'])
     # Autrement on le renvoie à la page de login
     return redirect(url_for('login'))
 
