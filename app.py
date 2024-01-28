@@ -16,7 +16,7 @@ def bonjour():
 @app.route('/get_render')
 def get_render():
 # Les templates sont dans le dossier templates
-    return render_template('get_render.html') # ATTENTION il faut redémarré l'application pour modifier le contenu du html
+    return render_template('get_render.html') # ATTENTION il faut redémarrer l'application pour modifier le contenu du html
 
 @app.route('/get_jinja')
 def get_jinja():
